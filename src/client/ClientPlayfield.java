@@ -5,11 +5,7 @@
 package client;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.input.KeyInput;
-import com.jme3.input.controls.AnalogListener;
-import com.jme3.input.controls.KeyTrigger;
 import com.jme3.material.Material;
-import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Sphere;
@@ -25,7 +21,6 @@ public class ClientPlayfield {
     
     public ClientPlayfield(SimpleApplication sa){
         this.sa = sa;
-        initKeys();
     }
     
     public void addSphere(FieldData fd){
@@ -42,31 +37,4 @@ public class ClientPlayfield {
         sa.getRootNode().attachChild(sg);
     }
     
-    private void initKeys(){
-        sa.getInputManager().addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
-        sa.getInputManager().addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
-        sa.getInputManager().addMapping("Up", new KeyTrigger(KeyInput.KEY_W));
-        sa.getInputManager().addMapping("Down", new KeyTrigger(KeyInput.KEY_S));
-        
-        sa.getInputManager().addListener(analogListener, new String[]{"Left","Right","Up","Down"});
-    }
-    
-    private AnalogListener analogListener = new AnalogListener() {
-
-        //TODO: Add planet movement here
-        public void onAnalog(String name, float value, float tpf) {
-            if(name.equals("Left")){
-                
-            }            
-            if(name.equals("Right")){
-                
-            }            
-            if(name.equals("Up")){
-                
-            }            
-            if(name.equals("Down")){
-                
-            }
-        }
-    };
 }
