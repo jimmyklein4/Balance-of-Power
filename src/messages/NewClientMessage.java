@@ -10,6 +10,7 @@ public class NewClientMessage extends AbstractMessage {
 
     public int ID;
     public LinkedList<FieldData> field;
+    String message;
 
     // -------------------------------------------------------------------------
     public NewClientMessage() {
