@@ -37,6 +37,8 @@ public class PlayField {
             return (true);
         }
         else{
+            //(TODO)add new message telling the "client" that he cannot play
+            //kick client message
             return(false);
         }
     }
