@@ -52,12 +52,12 @@ public class FieldData {
      */
     public int subtractEnergy(int sub){
         if(energyLevel > 0){
-            if(energyLevel - sub > 0){
-                energyLevel -= sub;
+            if(energyLevel + sub > 0){
+                energyLevel += sub;
             }
             else{
                 energyLevel = 0;
-                return (sub - energyLevel);
+                return (sub + energyLevel);
             }
             return -1;
         }
