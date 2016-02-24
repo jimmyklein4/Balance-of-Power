@@ -17,6 +17,7 @@ public class PlayField {
     public final static float MINMAX = 10f;
     public final static float RADIUS = 1f;
     public LinkedList<FieldData> data;
+    public final int MAXNUMPLAYERS = 8;
 
     // -------------------------------------------------------------------------
     public PlayField() {
@@ -34,11 +35,13 @@ public class PlayField {
         float b = rand.nextFloat();
         ColorRGBA c = new ColorRGBA(r, g, b, 1.0f);
         //
-        FieldData newData = new FieldData(id, x, y, z, c);
-        data.addLast(newData);
-        //
-        // here we could add a test for max. number of players reached.
-        // (TODO)
-        return (true);
+        if(data.size() < MAXNUMPLAYERS){
+            FieldData newData = new FieldData(id, x, y, z, c);
+            data.addLast(newData);
+            return (true);
+        }
+        else{
+            return(false);
+        }
     }
 }
