@@ -4,6 +4,7 @@
 package server;
 
 import com.jme3.network.Message;
+import messages.ChangeEnergy;
 import messages.NewClientMessage;
 
 /**
@@ -37,7 +38,12 @@ public class GameServer implements ServerNetworkListener {
     // -------------------------------------------------------------------------
     // Methods required by ServerNetworkHandler
     public void messageReceived(Message msg) {
-
+        if(msg instanceof ChangeEnergy){
+            //We now know an energy change is happening
+            ChangeEnergy message = (ChangeEnergy)msg;
+            playfield.data.get(message.sender).subtractEnergy(message.energy);
+            playfield.data.get(message.reciever).addEnergy(message.energy);
+        }
     }
 
     // -------------------------------------------------------------------------

@@ -14,15 +14,17 @@ import com.jme3.network.serializing.Serializable;
 @Serializable
 public class ChangeEnergy extends AbstractMessage{
     public int energy;
-    public int player;
+    public int sender;
+    public int reciever;
     
     public ChangeEnergy(){
         
     }
     //----------------------------------
-    public ChangeEnergy(int en, int player){
-        energy = en;
-        this.player = player;
+    public ChangeEnergy(int energy, int sender, int reciever){
+        this.energy = energy;
+        this.sender = sender;
+        this.reciever = reciever;
     }
     
 }
