@@ -4,20 +4,23 @@
  */
 package messages;
 
+import com.jme3.network.AbstractMessage;
+
 /**
  *
  * @author Theo
  */
-public class Infusion {
+public class Infusion extends AbstractMessage{
     public int sender;
     public int reciever;
-    public boolean start_stop;
+    public boolean started;
     
     public Infusion(){
         
     }
-    public Infusion(int sender, int reciever, boolean start_stop){
+    public Infusion(int sender, int reciever, boolean started){
         this.sender = sender;
         this.reciever = reciever;
+        this.started = started;
     }
 }

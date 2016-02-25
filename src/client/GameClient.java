@@ -32,6 +32,7 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
     private int ID = -1;
     protected ClientNetworkHandler networkHandler;
     private ClientPlayfield playfield;
+    private boolean sent;
 
     // -------------------------------------------------------------------------
     public static void main(String[] args) {
@@ -179,13 +180,12 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
     
     public void attack(int energy, int sender, int reciever){
         ChangeEnergy msg = new ChangeEnergy(energy, sender, reciever);
-        msg.sender = sender;
-        msg.reciever= reciever;
-        msg.energy = energy;
         networkHandler.send(msg);
     }
     
     public void absorb(int sender, int reciever){
-        Absorb msg = new Absorb(sender, reciever);
+        Absorb msg = new Absorb(sender, reciever, sent);
+        sent = !sent;
+        networkHandler.send(msg);
     }
 }

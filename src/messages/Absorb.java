@@ -4,23 +4,27 @@
  */
 package messages;
 
+import com.jme3.network.AbstractMessage;
+
 /**
  *
  * @author Theo
  */
-public class Absorb {
+public class Absorb extends AbstractMessage{
     public int sender;
     public int reciever;
-    public boolean start_stop;
+    public boolean started;
     
     public Absorb(){
         
     }
-    public Absorb(int sender, int reciever){
+    public Absorb(int sender, int reciever, boolean start_stop){
         this.sender = sender;
         this.reciever = reciever;
+        this.started = start_stop;
     }
-    public Absorb(boolean start_stop){
-        this.start_stop = start_stop;
+    public boolean hasStarted(){
+        return started;
     }
 }
+

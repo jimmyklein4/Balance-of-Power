@@ -17,6 +17,7 @@ public class GameServer implements ServerNetworkListener {
 
     ServerNetworkHandler networkHandler;
     PlayField playfield;
+    Absorb a[] = new Absorb[8];
 
     // -------------------------------------------------------------------------
     public static void main(String[] args) {
@@ -26,6 +27,11 @@ public class GameServer implements ServerNetworkListener {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
+            }
+            for(Absorb b : gs.a){
+                if(b.started){
+                    gs.playfield.data.get(b.sender).changeEnergy(-1);
+                }
             }
         }
     }
@@ -52,13 +58,12 @@ public class GameServer implements ServerNetworkListener {
                 playfield.data.get(message.sender).changeEnergy(returned);
             }
             UpdateMessage upd = new UpdateMessage(playfield.data);
-            for(int i = 0; i < playfield.data.size(); i++){
-                networkHandler.sendToClient(i, upd);
-            }
+            updateClients(upd);
         }
         if(msg instanceof Absorb){
             Absorb message = (Absorb)msg;
-            playfield.data.get(message.sender).changeEnergy(0);
+            a[message.sender] = message;
+            playfield.data.get(a[message.sender].sender).changeEnergy(0);
         }
     }
 
@@ -72,5 +77,9 @@ public class GameServer implements ServerNetworkListener {
         // send entire playfield to new client
         NewClientMessage iniCM = new NewClientMessage(connectionID, playfield.data);
         return (iniCM);
+    }
+    
+    private void updateClients(Message msg){
+        networkHandler.broadcast(msg);
     }
 }
