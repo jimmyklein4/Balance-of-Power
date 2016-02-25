@@ -41,8 +41,8 @@ public class GameServer implements ServerNetworkListener {
         if(msg instanceof ChangeEnergy){
             //We now know an energy change is happening
             ChangeEnergy message = (ChangeEnergy)msg;
-            playfield.data.get(message.sender).subtractEnergy(message.energy);
-            playfield.data.get(message.reciever).addEnergy(message.energy);
+            playfield.data.get(message.sender).changeEnergy(message.energy);
+            playfield.data.get(message.reciever).changeEnergy(message.energy);
         }
     }
 

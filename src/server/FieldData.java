@@ -36,33 +36,17 @@ public class FieldData {
         return energyLevel;
     }
     
-    public boolean addEnergy(int add){
+    public int changeEnergy(int amount){
         if(energyLevel > 0){
-            energyLevel += add;
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    
-    /**
-     * @param sub
-     * @return -1 if true, 0 if false
-     */
-    public int subtractEnergy(int sub){
-        if(energyLevel > 0){
-            if(energyLevel + sub > 0){
-                energyLevel += sub;
+            if(energyLevel + amount > 0){
+                energyLevel += amount;
             }
             else{
                 energyLevel = 0;
-                return (sub + energyLevel);
+                return(-(energyLevel + amount));
             }
             return -1;
         }
-        else{
-            return 0;
-        }
+        return 0;
     }
 }
