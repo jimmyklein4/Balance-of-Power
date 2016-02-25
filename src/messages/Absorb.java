@@ -13,7 +13,7 @@ import com.jme3.network.AbstractMessage;
 public class Absorb extends AbstractMessage{
     public int sender;
     public int reciever;
-    public boolean start_stop;
+    public boolean started;
     
     public Absorb(){
         
@@ -21,7 +21,10 @@ public class Absorb extends AbstractMessage{
     public Absorb(int sender, int reciever, boolean start_stop){
         this.sender = sender;
         this.reciever = reciever;
-        this.start_stop = start_stop;
+        this.started = start_stop;
+    }
+    public boolean hasStarted(){
+        return started;
     }
 }
 
