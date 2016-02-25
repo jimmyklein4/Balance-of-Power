@@ -144,11 +144,17 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
     // -------------------------------------------------------------------------
     // Keyboard & Mouse input
     private void initKeys() {
-        inputManager.addMapping("ATTACK",new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
+        inputManager.addMapping("Select", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));        
         
+        inputManager.addMapping("Donation", new KeyTrigger(KeyInput.KEY_D));
+        inputManager.addMapping("Attack", new KeyTrigger(KeyInput.KEY_A));
+        inputManager.addMapping("Absorb", new KeyTrigger(KeyInput.KEY_W));
+        inputManager.addMapping("Infusion", new KeyTrigger(KeyInput.KEY_S));
         
         inputManager.addMapping("PL_EXPLODE", new KeyTrigger(KeyInput.KEY_SPACE));
-        inputManager.addListener(this, new String[]{"PL_EXPLODE", "ATTACK"});
+        inputManager.addListener(this, new String[]{"PL_EXPLODE", "Select", "Donation", 
+                                            "Attack", "Absorb", "Infusion"});
+        
     }
 
     // key action
