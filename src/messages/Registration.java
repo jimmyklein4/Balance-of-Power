@@ -17,5 +17,6 @@ public class Registration {
         Serializer.registerClass(FieldData.class);
         Serializer.registerClass(Absorb.class);
         Serializer.registerClass(ChangeEnergy.class);
+        Serializer.registerClass(UpdateMessage.class);
     }
 }

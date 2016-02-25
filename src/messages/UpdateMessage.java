@@ -9,6 +9,7 @@ import server.FieldData;
  *
  * @author Chris
  */
+@Serializable
 public class UpdateMessage extends AbstractMessage{
     public LinkedList<FieldData> field;
     

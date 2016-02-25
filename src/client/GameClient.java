@@ -24,9 +24,11 @@ import com.jme3.system.AppSettings;
 import com.jme3.util.SkyFactory;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.LinkedList;
 import messages.Absorb;
 import messages.ChangeEnergy;
 import messages.NewClientMessage;
+import messages.UpdateMessage;
 import server.FieldData;
 
 public class GameClient extends SimpleApplication implements ClientNetworkListener, ActionListener {
@@ -36,6 +38,7 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
     protected ClientNetworkHandler networkHandler;
     private ClientPlayfield playfield;
     private boolean sent = true;
+    public LinkedList<FieldData> data;
 
     // -------------------------------------------------------------------------
     public static void main(String[] args) {
@@ -192,6 +195,14 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
                 initGame(ncm);
             } else {
                 playfield.addSphere(ncm.field.getLast());
+            }
+        }
+        if (msg instanceof UpdateMessage){
+            UpdateMessage um = (UpdateMessage)msg;
+            System.out.println("Update Message recieved from server");
+            for(int i = 0;i<8; i++){
+                FieldData f = um.field.get(i);
+                data.add(i, f);
             }
         }
     }
