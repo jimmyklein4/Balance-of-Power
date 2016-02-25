@@ -6,6 +6,7 @@ package server;
 import com.jme3.network.Message;
 import messages.Absorb;
 import messages.ChangeEnergy;
+import messages.Infusion;
 import messages.NewClientMessage;
 import messages.UpdateMessage;
 
@@ -18,6 +19,7 @@ public class GameServer implements ServerNetworkListener {
     ServerNetworkHandler networkHandler;
     PlayField playfield;
     Absorb a[] = new Absorb[8];
+    Infusion in[] = new Infusion[8];
 
     // -------------------------------------------------------------------------
     public static void main(String[] args) {
@@ -40,6 +42,17 @@ public class GameServer implements ServerNetworkListener {
                     }
                 }
             }
+            for(Infusion in : gs.in){
+                if(in!=null){
+                    if(in.started){
+                        int i = in.sender;
+                        gs.playfield.data.get(i).changeEnergy(-2);
+                        gs.playfield.data.get(in.reciever).changeEnergy(2);
+                    }
+                }
+            }
+            UpdateMessage upd = new UpdateMessage(gs.playfield.data);
+            gs.updateClients(upd);
         }
     }
 
