@@ -21,6 +21,7 @@ import com.jme3.system.AppSettings;
 import com.jme3.util.SkyFactory;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import messages.Absorb;
 import messages.ChangeEnergy;
 import messages.NewClientMessage;
 import server.FieldData;
@@ -176,5 +177,9 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
         msg.reciever= reciever;
         msg.energy = energy;
         networkHandler.send(msg);
+    }
+    
+    public void absorb(int sender, int reciever){
+        Absorb msg = new Absorb(sender, reciever);
     }
 }

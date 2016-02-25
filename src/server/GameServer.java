@@ -4,6 +4,7 @@
 package server;
 
 import com.jme3.network.Message;
+import messages.Absorb;
 import messages.ChangeEnergy;
 import messages.NewClientMessage;
 import messages.UpdateMessage;
@@ -54,6 +55,10 @@ public class GameServer implements ServerNetworkListener {
             for(int i = 0; i < playfield.data.size(); i++){
                 networkHandler.sendToClient(i, upd);
             }
+        }
+        if(msg instanceof Absorb){
+            Absorb message = (Absorb)msg;
+            playfield.data.get(message.sender).changeEnergy(0);
         }
     }
 
