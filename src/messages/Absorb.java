@@ -25,8 +25,5 @@ public class Absorb extends AbstractMessage{
         this.reciever = reciever;
         this.started = start_stop;
     }
-    public boolean hasStarted(){
-        return started;
-    }
 }
 
