@@ -51,6 +51,9 @@ public class GameServer implements ServerNetworkListener {
                 playfield.data.get(message.sender).changeEnergy(returned);
             }
             UpdateMessage upd = new UpdateMessage(playfield.data);
+            for(int i = 0; i < playfield.data.size(); i++){
+                networkHandler.sendToClient(i, upd);
+            }
         }
     }
 
