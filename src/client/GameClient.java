@@ -1,12 +1,13 @@
 package client;
 
 import com.jme3.app.DebugKeysAppState;
+import com.jme3.input.MouseInput;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.StatsAppState;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
@@ -24,7 +25,7 @@ import messages.ChangeEnergy;
 import messages.NewClientMessage;
 import server.FieldData;
 
-public class GameClient extends SimpleApplication implements ClientNetworkListener, ActionListener, AnalogListener {
+public class GameClient extends SimpleApplication implements ClientNetworkListener, ActionListener {
     //
 
     private int ID = -1;
@@ -140,18 +141,13 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
     }
 
     // -------------------------------------------------------------------------
-    // Keyboard input
+    // Keyboard & Mouse input
     private void initKeys() {
-        inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
-        inputManager.addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
-        inputManager.addMapping("Up", new KeyTrigger(KeyInput.KEY_W));
-        inputManager.addMapping("Down", new KeyTrigger(KeyInput.KEY_S));
-        
-        inputManager.addListener(this, new String[]{"Left","Right","Up","Down"});
+        inputManager.addMapping("ATTACK",new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
         
         
         inputManager.addMapping("PL_EXPLODE", new KeyTrigger(KeyInput.KEY_SPACE));
-        inputManager.addListener(this, new String[]{"PL_EXPLODE"});
+        inputManager.addListener(this, new String[]{"PL_EXPLODE", "ATTACK"});
     }
 
     // key action
@@ -160,21 +156,6 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
         }
     }
     
-    @Override
-    public void onAnalog(String name, float value, float tpf){
-        if(name.equals("Left")){
-                
-        }            
-        if(name.equals("Right")){
-                
-        }            
-        if(name.equals("Up")){
-                
-        }            
-        if(name.equals("Down")){
-                
-        }
-    }
 
     // -------------------------------------------------------------------------
     // message received
