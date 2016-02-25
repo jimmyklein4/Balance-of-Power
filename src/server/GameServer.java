@@ -52,9 +52,7 @@ public class GameServer implements ServerNetworkListener {
                 playfield.data.get(message.sender).changeEnergy(returned);
             }
             UpdateMessage upd = new UpdateMessage(playfield.data);
-            for(int i = 0; i < playfield.data.size(); i++){
-                networkHandler.sendToClient(i, upd);
-            }
+            updateClients(upd);
         }
         if(msg instanceof Absorb){
             Absorb message = (Absorb)msg;
@@ -72,5 +70,11 @@ public class GameServer implements ServerNetworkListener {
         // send entire playfield to new client
         NewClientMessage iniCM = new NewClientMessage(connectionID, playfield.data);
         return (iniCM);
+    }
+    
+    private void updateClients(Message msg){
+        for(int i = 0; i < playfield.data.size(); i++){
+                networkHandler.sendToClient(i, msg);
+            }
     }
 }
