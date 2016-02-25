@@ -2,22 +2,27 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package messages;
-
-/**
- *
- * @author Theo
- */
-public class Infusion {
-    public int sender;
-    public int reciever;
-    public boolean start_stop;
-    
-    public Infusion(){
-        
-    }
-    public Infusion(int sender, int reciever, boolean start_stop){
-        this.sender = sender;
-        this.reciever = reciever;
-    }
-}
+ package messages;
+  
+  import com.jme3.network.AbstractMessage;
+  import com.jme3.network.serializing.Serializable;
+  
+  /**
+   *
+   * @author Theo
+   */
+ @Serializable
+  public class Infusion extends AbstractMessage{
+      public int sender;
+      public int reciever;
+     public boolean started;
+     
+     public Infusion(){
+         
+     }
+     public Infusion(int sender, int reciever, boolean started){
+         this.sender = sender;
+         this.reciever = reciever;
+         this.started = started;
+     }
+ }
