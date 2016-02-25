@@ -201,10 +201,7 @@
         if (msg instanceof UpdateMessage){
             UpdateMessage um = (UpdateMessage)msg;
             System.out.println("Update Message recieved from server");
-            for(int i = 0;i<8; i++){
-                FieldData f = um.field.get(i);
-                data.add(i, f);
-            }
+            data = um.field;
         }
     }
     
