@@ -16,11 +16,10 @@ public class Absorb {
     public Absorb(){
         
     }
-    public Absorb(int sender, int reciever){
+    public Absorb(int sender, int reciever, boolean start_stop){
         this.sender = sender;
         this.reciever = reciever;
-    }
-    public Absorb(boolean start_stop){
         this.start_stop = start_stop;
     }
 }
+
