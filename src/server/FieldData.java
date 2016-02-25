@@ -45,8 +45,8 @@ public class FieldData {
                 energyLevel = 0;
                 return(-(energyLevel + amount));
             }
-            return -1;
+            return 0;
         }
-        return 0;
+        return amount;
     }
 }

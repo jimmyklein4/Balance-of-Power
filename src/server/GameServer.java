@@ -42,7 +42,13 @@ public class GameServer implements ServerNetworkListener {
             //We now know an energy change is happening
             ChangeEnergy message = (ChangeEnergy)msg;
             playfield.data.get(message.sender).changeEnergy(message.energy);
-            playfield.data.get(message.reciever).changeEnergy(message.energy);
+            int returned = playfield.data.get(message.reciever).changeEnergy(message.energy);
+            if(returned == 0){
+                //do nothing
+            }
+            else{
+                playfield.data.get(message.sender).changeEnergy(returned);
+            }
         }
     }
 
