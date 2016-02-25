@@ -4,11 +4,13 @@
  */
 package messages;
 
+import com.jme3.network.AbstractMessage;
+
 /**
  *
  * @author Theo
  */
-public class Infusion {
+public class Infusion extends AbstractMessage{
     public int sender;
     public int reciever;
     public boolean start_stop;
