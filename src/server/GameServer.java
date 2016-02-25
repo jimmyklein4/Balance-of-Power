@@ -73,8 +73,6 @@ public class GameServer implements ServerNetworkListener {
     }
     
     private void updateClients(Message msg){
-        for(int i = 0; i < playfield.data.size(); i++){
-                networkHandler.sendToClient(i, msg);
-            }
+        networkHandler.broadcast(msg);
     }
 }
