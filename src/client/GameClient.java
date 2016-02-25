@@ -32,7 +32,7 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
     private int ID = -1;
     protected ClientNetworkHandler networkHandler;
     private ClientPlayfield playfield;
-    private boolean sent;
+    private boolean sent = true;
 
     // -------------------------------------------------------------------------
     public static void main(String[] args) {

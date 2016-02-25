@@ -5,11 +5,13 @@
 package messages;
 
 import com.jme3.network.AbstractMessage;
+import com.jme3.network.serializing.Serializable;
 
 /**
  *
  * @author Theo
  */
+@Serializable
 public class Infusion extends AbstractMessage{
     public int sender;
     public int reciever;

@@ -15,5 +15,7 @@ public class Registration {
     public static void registerMessages() {
         Serializer.registerClass(NewClientMessage.class);
         Serializer.registerClass(FieldData.class);
+        Serializer.registerClass(Absorb.class);
+        Serializer.registerClass(ChangeEnergy.class);
     }
 }

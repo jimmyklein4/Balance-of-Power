@@ -28,10 +28,15 @@ public class GameServer implements ServerNetworkListener {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
             }
+            //about once a second
             for(Absorb b : gs.a){
                 if(b!=null){
                     if(b.started){
-                        gs.playfield.data.get(b.sender).changeEnergy(-1);
+                        int i = b.sender;
+                        gs.playfield.data.get(i).changeEnergy(-2);
+                        gs.playfield.data.get(b.reciever).changeEnergy(2);
+                        System.out.println("Thread "+ i + " energy: " + gs.playfield.data.get(i).getEnergyLevel());
+                        System.out.println("Thread "+ i + " energy: " + gs.playfield.data.get(b.reciever).getEnergyLevel());
                     }
                 }
             }
@@ -63,6 +68,7 @@ public class GameServer implements ServerNetworkListener {
             updateClients(upd);
         }
         if(msg instanceof Absorb){
+            System.out.println("We in here");
             Absorb message = (Absorb)msg;
             a[message.sender] = message;
             //playfield.data.get(a[message.sender].sender).changeEnergy(0);
