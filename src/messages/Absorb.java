@@ -11,6 +11,7 @@ package messages;
 public class Absorb {
     public int sender;
     public int reciever;
+    public boolean start_stop;
     
     public Absorb(){
         
@@ -18,5 +19,8 @@ public class Absorb {
     public Absorb(int sender, int reciever){
         this.sender = sender;
         this.reciever = reciever;
+    }
+    public Absorb(boolean start_stop){
+        this.start_stop = start_stop;
     }
 }
