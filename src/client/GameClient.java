@@ -169,12 +169,14 @@ public class GameClient extends SimpleApplication implements ClientNetworkListen
         if (isPressed) {
             if(name.equals("Select")){
                 CollisionResults results = new CollisionResults();
+                //Translate the click into 3d space
                 Vector2f click2d = inputManager.getCursorPosition();
                 Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y),0f).clone();
                 Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 1f).subtractLocal(click3d).normalizeLocal();
                 
                 Ray ray = new Ray(click3d, dir);
                 rootNode.collideWith(ray, results);
+                //Print whats going on 
                 for(int i=0; i<results.size(); i++){
                     float dist = results.getCollision(i).getDistance();
                     Vector3f pt = results.getCollision(i).getContactPoint();
