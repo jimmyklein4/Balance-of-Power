@@ -8,7 +8,10 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Sphere;
+import java.util.List;
 import server.FieldData;
 
 /**
@@ -23,7 +26,7 @@ public class ClientPlayfield {
         this.sa = sa;
     }
     
-    public void addSphere(FieldData fd){
+    public void addSphere(FieldData fd, Node sphereNode){
         Sphere s = new Sphere(32,32,1);
         Geometry sg = new Geometry("",s);
         Material mat = new Material(sa.getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
@@ -34,7 +37,8 @@ public class ClientPlayfield {
         mat.setFloat("Shininess", 20f); // shininess from 1-128
         sg.setMaterial(mat);
         sg.setLocalTranslation(fd.x, fd.y, fd.z);
-        sa.getRootNode().attachChild(sg);
+        
+        sphereNode.attachChild(sg);
     }
     
 }

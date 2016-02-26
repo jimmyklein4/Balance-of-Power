@@ -18,7 +18,9 @@
  import com.jme3.network.Message;
  import com.jme3.post.FilterPostProcessor;
  import com.jme3.post.filters.BloomFilter;
+import com.jme3.scene.Node;
  import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Sphere;
  import com.jme3.shadow.DirectionalLightShadowRenderer;
  import com.jme3.system.AppSettings;
  import com.jme3.util.SkyFactory;
@@ -42,6 +44,7 @@ import messages.Infusion;
      private boolean asent = false, isent = false;
      public LinkedList<FieldData> data;
      public FieldData target;
+     public Node sphereNode;
  
      // -------------------------------------------------------------------------
      public static void main(String[] args) {
@@ -146,8 +149,12 @@ import messages.Infusion;
          this.ID = msg.ID;
          System.out.println("My ID: " + this.ID);
          playfield = new ClientPlayfield(this);
+         
+         sphereNode = new Node();
+         rootNode.attachChild(sphereNode);
+         
          for (FieldData fd : msg.field) {
-             playfield.addSphere(fd);
+             playfield.addSphere(fd, sphereNode);
          }
      }
  
@@ -161,6 +168,7 @@ import messages.Infusion;
          inputManager.addMapping("Absorb", new KeyTrigger(KeyInput.KEY_S));
          inputManager.addMapping("Infusion", new KeyTrigger(KeyInput.KEY_W));
          inputManager.addMapping("Quit", new KeyTrigger(KeyInput.KEY_Q));
+         inputManager.addMapping("Quit", new KeyTrigger(KeyInput.KEY_ESCAPE));
          
          inputManager.addMapping("PL_EXPLODE", new KeyTrigger(KeyInput.KEY_SPACE));
          inputManager.addListener(this, new String[]{"PL_EXPLODE", "Select", "Donation", 
@@ -179,14 +187,16 @@ import messages.Infusion;
                 Vector3f pt = new Vector3f();
                 
                 Ray ray = new Ray(click3d, dir);
-                rootNode.collideWith(ray, results);
+                sphereNode.collideWith(ray, results);
                 //Print whats going on 
-                for(int i=1; i<results.size()-1; i++){
+                for(int i=0; i<results.size(); i++){
                     float dist = results.getCollision(i).getDistance();
                     pt = results.getCollision(i).getContactPoint();
                     String target = results.getCollision(i).getGeometry().getName();
                     System.out.println("Selection #" + i + ": " + target + " at " + pt + ", " + dist + " WU away.");
                 }
+                
+                //find which sphere the mouse clicked on 
                 Vector3f sp;
                 FieldData fd;
                 for(int i = 0; i < data.size(); i++){
@@ -236,7 +246,7 @@ import messages.Infusion;
             if (this.ID == -1) {
                 initGame(ncm);
             } else {
-                playfield.addSphere(ncm.field.getLast());
+                playfield.addSphere(ncm.field.getLast(), sphereNode);
             }
         }
         if (msg instanceof UpdateMessage){
