@@ -10,6 +10,7 @@ package server;
   import messages.Infusion;
   import messages.NewClientMessage;
   import messages.UpdateMessage;
+  import messages.ClientDisconnect;
   
  /**
   *
@@ -21,10 +22,14 @@ package server;
       PlayField playfield;
       Absorb a[] = new Absorb[8];
       Infusion in[] = new Infusion[8];
+      boolean free[] = new boolean[8];
       // -------------------------------------------------------------------------
       public static void main(String[] args) {
          System.out.println("Starting Game Server at port " + ServerNetworkHandler.SERVERPORT);
          GameServer gs = new GameServer();
+         for(int i = 0; i < 8; i++){
+             gs.free[i] = true;
+         }
          while (true) {
              try {
                  Thread.sleep(1000);
@@ -63,13 +68,13 @@ package server;
           }
       }
      // -------------------------------------------------------------------------
-     public GameServer() {
+      public GameServer() {
          networkHandler = new ServerNetworkHandler(this);
          playfield = new PlayField();
      }
      // -------------------------------------------------------------------------
      // Methods required by ServerNetworkHandler
-     public void messageReceived(Message msg) {
+      public void messageReceived(Message msg) {
          if(msg instanceof ChangeEnergy){
              //We now know an energy change is happening
              ChangeEnergy message = (ChangeEnergy)msg;
@@ -93,9 +98,15 @@ package server;
              Infusion message = (Infusion)msg;
              in[message.sender] = message;
          }
-     }
-     // -------------------------------------------------------------------------
-     public Message newConnectionReceived(int connectionID) throws Exception {
+         if(msg instanceof ClientDisconnect){
+             ClientDisconnect cd = (ClientDisconnect)msg;
+             int ID = cd.ID;
+             playfield.data.remove(ID);
+             //will this actuall remove a user from the playfield?             
+         }
+      }
+      // -------------------------------------------------------------------------
+      public Message newConnectionReceived(int connectionID) throws Exception {
          // put player on random playfield
          boolean ok = playfield.addElement(connectionID);
          if (!ok) {
@@ -103,6 +114,7 @@ package server;
          }
          // send entire playfield to new client
          NewClientMessage iniCM = new NewClientMessage(connectionID, playfield.data);
+         free[connectionID] = false;
          return (iniCM);
      }
      

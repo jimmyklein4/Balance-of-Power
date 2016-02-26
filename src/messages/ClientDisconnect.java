@@ -8,7 +8,7 @@ import com.jme3.network.serializing.Serializable;
  */
 @Serializable
 public class ClientDisconnect extends AbstractMessage{
-    int ID;
+    public int ID;
     
     public ClientDisconnect(){
         
