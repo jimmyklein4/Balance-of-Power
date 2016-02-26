@@ -16,6 +16,7 @@ package messages;
          Serializer.registerClass(NewClientMessage.class);
           Serializer.registerClass(FieldData.class);
           Serializer.registerClass(Absorb.class);
+          Serializer.registerClass(ClientDisconnect.class);
           Serializer.registerClass(ChangeEnergy.class);
           Serializer.registerClass(UpdateMessage.class);
           Serializer.registerClass(Infusion.class);

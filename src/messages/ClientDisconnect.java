@@ -1,16 +1,20 @@
 package messages;
 
+import com.jme3.network.AbstractMessage;
+import com.jme3.network.serializing.Serializable;
+
 /**
  * @author Chris
  */
-public class ClientDisconnect {
+@Serializable
+public class ClientDisconnect extends AbstractMessage{
     int ID;
     
-    ClientDisconnect(){
+    public ClientDisconnect(){
         
     }
     
-    ClientDisconnect(int ID){
+    public ClientDisconnect(int ID){
         this.ID = ID;
     }
 }

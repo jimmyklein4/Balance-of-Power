@@ -27,6 +27,7 @@
  import java.util.LinkedList;
  import messages.Absorb;
  import messages.ChangeEnergy;
+import messages.ClientDisconnect;
 import messages.Infusion;
  import messages.NewClientMessage;
  import messages.UpdateMessage;
@@ -217,6 +218,11 @@ import messages.Infusion;
                 if(target != null){
                     infuse(ID, target.id);
                 }
+            }
+            if(name.equals("Quit")){
+                ClientDisconnect msg = new ClientDisconnect(ID);
+                networkHandler.send(msg);
+                System.exit(0);
             }
         }
     }
