@@ -32,9 +32,13 @@ package server;
              } catch (InterruptedException ex) {
              }
              //about once a second
+             int j = 0;
              for(Absorb b : gs.a){
+                 j++;
                  if(b!=null){
+                     System.out.println("b is not null");
                      if(b.started){
+                         System.out.println("b is client: "+ j);
                          int i = b.sender;
                          gs.playfield.data.get(i).changeEnergy(-2);
                          gs.playfield.data.get(b.reciever).changeEnergy(2);
