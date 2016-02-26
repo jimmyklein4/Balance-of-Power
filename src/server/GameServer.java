@@ -22,14 +22,10 @@ package server;
       PlayField playfield;
       Absorb a[] = new Absorb[8];
       Infusion in[] = new Infusion[8];
-      boolean free[] = new boolean[8];
       // -------------------------------------------------------------------------
       public static void main(String[] args) {
          System.out.println("Starting Game Server at port " + ServerNetworkHandler.SERVERPORT);
          GameServer gs = new GameServer();
-         for(int i = 0; i < 8; i++){
-             gs.free[i] = true;
-         }
          while (true) {
              try {
                  Thread.sleep(1000);
@@ -109,12 +105,11 @@ package server;
       public Message newConnectionReceived(int connectionID) throws Exception {
          // put player on random playfield
          boolean ok = playfield.addElement(connectionID);
-         if (!ok) {
+         if (!ok){
              throw new Exception("Max number of players exceeded.");
          }
          // send entire playfield to new client
          NewClientMessage iniCM = new NewClientMessage(connectionID, playfield.data);
-         free[connectionID] = false;
          return (iniCM);
      }
      
