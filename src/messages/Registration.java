@@ -18,5 +18,6 @@ package messages;
           Serializer.registerClass(Absorb.class);
           Serializer.registerClass(ChangeEnergy.class);
           Serializer.registerClass(UpdateMessage.class);
+          Serializer.registerClass(Infusion.class);
       }
   }

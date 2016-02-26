@@ -27,6 +27,7 @@
  import java.util.LinkedList;
  import messages.Absorb;
  import messages.ChangeEnergy;
+import messages.Infusion;
  import messages.NewClientMessage;
  import messages.UpdateMessage;
  import server.FieldData;
@@ -37,7 +38,7 @@
      private int ID = -1;
      protected ClientNetworkHandler networkHandler;
      private ClientPlayfield playfield;
-     private boolean sent = true;
+     private boolean asent = false, isent = false;
      public LinkedList<FieldData> data;
      public FieldData target;
  
@@ -200,7 +201,11 @@
                 if(target != null){
                     absorb(ID, target.id);
                 }
-                
+            }
+            if(name.equals("Infusion")){
+                if(target != null){
+                    infuse(ID, target.id);
+                }
             }
         }
     }
@@ -219,19 +224,30 @@
         }
         if (msg instanceof UpdateMessage){
             UpdateMessage um = (UpdateMessage)msg;
-            System.out.println("Update Message recieved from server");
             data = um.field;
         }
     }
     
     public void attack(int energy, int sender, int reciever){
-        ChangeEnergy msg = new ChangeEnergy(energy, sender, reciever);
-        networkHandler.send(msg);
+        if(!isent&&!asent){
+            ChangeEnergy msg = new ChangeEnergy(energy, sender, reciever);
+            networkHandler.send(msg);
+        }
     }
     
     public void absorb(int sender, int reciever){
-        Absorb msg = new Absorb(sender, reciever, sent);
-        networkHandler.send(msg);
-        sent = !sent;
+        if(!isent){
+            asent = !asent;
+            Absorb msg = new Absorb(sender, reciever, asent);
+            networkHandler.send(msg);
+        }
     }
+    public void infuse(int sender, int reciever){
+        if(!asent){
+            isent = !isent;
+            Infusion msg = new Infusion(sender, reciever, isent);
+            networkHandler.send(msg);
+        }
+    }
+    
 }

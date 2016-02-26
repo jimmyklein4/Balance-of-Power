@@ -36,23 +36,26 @@ package server;
              for(Absorb b : gs.a){
                  j++;
                  if(b!=null){
-                     System.out.println("b is not null");
                      if(b.started){
-                         System.out.println("b is client: "+ j);
+                         System.out.println("absorb from: "+ j + "to: " +b.sender);
                          int i = b.sender;
-                         gs.playfield.data.get(i).changeEnergy(-2);
-                         gs.playfield.data.get(b.reciever).changeEnergy(2);
+                         gs.playfield.data.get(i).changeEnergy(2);
+                         gs.playfield.data.get(b.reciever).changeEnergy(-2);
                          System.out.println("Thread "+ i + " energy: " + gs.playfield.data.get(i).getEnergyLevel());
                          System.out.println("Thread "+ i + " energy: " + gs.playfield.data.get(b.reciever).getEnergyLevel());
                       }
                   }
               }
+             int k = 0;
              for(Infusion in : gs.in){
                  if(in!=null){
                      if(in.started){
+                         System.out.println("infuse from: "+ in.sender + "to: " +k);
                          int i = in.sender;
                          gs.playfield.data.get(i).changeEnergy(-2);
                          gs.playfield.data.get(in.reciever).changeEnergy(2);
+                         System.out.println("Thread "+ i + " energy: " + gs.playfield.data.get(i).getEnergyLevel());
+                         System.out.println("Thread "+ i + " energy: " + gs.playfield.data.get(in.reciever).getEnergyLevel());
                      }
                  }
              }
@@ -89,6 +92,10 @@ package server;
              Absorb message = (Absorb)msg;
              a[message.sender] = message;
              //playfield.data.get(a[message.sender].sender).changeEnergy(0);
+         }
+         if(msg instanceof Infusion){
+             Infusion message = (Infusion)msg;
+             in[message.sender] = message;
          }
      }
  
