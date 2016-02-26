@@ -21,7 +21,6 @@ package server;
       PlayField playfield;
       Absorb a[] = new Absorb[8];
       Infusion in[] = new Infusion[8];
-  
       // -------------------------------------------------------------------------
       public static void main(String[] args) {
          System.out.println("Starting Game Server at port " + ServerNetworkHandler.SERVERPORT);
@@ -63,14 +62,11 @@ package server;
              gs.updateClients(upd);
           }
       }
-  
      // -------------------------------------------------------------------------
      public GameServer() {
          networkHandler = new ServerNetworkHandler(this);
          playfield = new PlayField();
      }
- 
- 
      // -------------------------------------------------------------------------
      // Methods required by ServerNetworkHandler
      public void messageReceived(Message msg) {
@@ -98,7 +94,6 @@ package server;
              in[message.sender] = message;
          }
      }
- 
      // -------------------------------------------------------------------------
      public Message newConnectionReceived(int connectionID) throws Exception {
          // put player on random playfield
