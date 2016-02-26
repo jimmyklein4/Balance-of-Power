@@ -98,7 +98,8 @@ package server;
              ClientDisconnect cd = (ClientDisconnect)msg;
              int ID = cd.ID;
              playfield.data.remove(ID);
-             //will this actuall remove a user from the playfield?             
+             //will this actuall remove a user from the playfield?        
+             updateClients(new UpdateMessage(playfield.data));
          }
       }
       // -------------------------------------------------------------------------
