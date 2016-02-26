@@ -82,7 +82,6 @@ package server;
              updateClients(upd);
          }
          if(msg instanceof Absorb){
-             System.out.println("We in here");
              Absorb message = (Absorb)msg;
              a[message.sender] = message;
              //playfield.data.get(a[message.sender].sender).changeEnergy(0);
