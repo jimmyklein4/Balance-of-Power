@@ -159,10 +159,11 @@ import messages.Infusion;
          inputManager.addMapping("Attack", new KeyTrigger(KeyInput.KEY_A));
          inputManager.addMapping("Absorb", new KeyTrigger(KeyInput.KEY_S));
          inputManager.addMapping("Infusion", new KeyTrigger(KeyInput.KEY_W));
+         inputManager.addMapping("Quit", new KeyTrigger(KeyInput.KEY_Q));
          
          inputManager.addMapping("PL_EXPLODE", new KeyTrigger(KeyInput.KEY_SPACE));
          inputManager.addListener(this, new String[]{"PL_EXPLODE", "Select", "Donation", 
-                                             "Attack", "Absorb", "Infusion"});
+                                             "Attack", "Absorb", "Infusion", "Quit"});
          
      }
  
