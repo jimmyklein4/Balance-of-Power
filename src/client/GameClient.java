@@ -197,6 +197,16 @@ import messages.Infusion;
                     }
                 }
             }
+            if(name.equals("Attack")){
+                if(target!=null){
+                    attack(data.get(ID).getEnergyLevel(),ID, target.id);
+                }
+            }
+            if(name.equals("Donation")){
+                if(target!=null){
+                    donate(data.get(ID).getEnergyLevel(), ID, target.id);
+                }
+            }
             if(name.equals("Absorb")){
                 if(target != null){
                     absorb(ID, target.id);
@@ -229,6 +239,12 @@ import messages.Infusion;
     }
     
     public void attack(int energy, int sender, int reciever){
+        if(!isent&&!asent){
+            ChangeEnergy msg = new ChangeEnergy(-energy, sender, reciever);
+            networkHandler.send(msg);
+        }
+    }
+    public void donate(int energy, int sender, int reciever){
         if(!isent&&!asent){
             ChangeEnergy msg = new ChangeEnergy(energy, sender, reciever);
             networkHandler.send(msg);

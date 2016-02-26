@@ -77,8 +77,8 @@ package server;
          if(msg instanceof ChangeEnergy){
              //We now know an energy change is happening
              ChangeEnergy message = (ChangeEnergy)msg;
-             playfield.data.get(message.sender).changeEnergy(message.energy);
-             int returned = playfield.data.get(message.reciever).changeEnergy(message.energy);
+             playfield.data.get(message.sender).changeEnergy(-Math.abs(message.energy/2));
+             int returned = playfield.data.get(message.reciever).changeEnergy(message.energy/2);
              if(returned == 0){
                  //do nothing
              }
