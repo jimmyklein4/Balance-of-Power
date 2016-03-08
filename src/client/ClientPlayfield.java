@@ -15,6 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import server.FieldData;
+import java.util.concurrent.Callable;
+
 
 /**
  *
@@ -53,11 +55,19 @@ public class ClientPlayfield {
         
         while(i.hasNext()){
             f = i.next();
-            Spatial g = sphereNode.getChild("sphere"+f.id);
-            float s = (float)f.getEnergyLevel()* 0.01f;
+            final Spatial g = sphereNode.getChild("sphere"+f.id);
+            final float s = (float)f.getEnergyLevel()* 0.01f;
             System.out.println("float: "+s);
-            g.setLocalScale(s);
+            //g.setLocalScale(s);
+            //sa.enqueue(g);
+            sa.enqueue(new Callable<Spatial>(){
+                public Spatial call(){
+                    g.setLocalScale(s);
+                    return g;
+                }
+            });
         }
+
     }
     
 }
