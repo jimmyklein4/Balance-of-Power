@@ -45,6 +45,7 @@ import messages.Infusion;
      public LinkedList<FieldData> data;
      public FieldData target;
      public Node sphereNode;
+     float time;
  
      // -------------------------------------------------------------------------
      public static void main(String[] args) {
@@ -81,6 +82,7 @@ import messages.Infusion;
  
      // -------------------------------------------------------------------------
      public void SimpleUpdate(float tpf) {
+         
      }
  
      // -------------------------------------------------------------------------
@@ -252,6 +254,8 @@ import messages.Infusion;
         if (msg instanceof UpdateMessage){
             UpdateMessage um = (UpdateMessage)msg;
             data = um.field;
+            
+            playfield.updatePlayfield(data, sphereNode);
         }
     }
     

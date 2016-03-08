@@ -11,7 +11,9 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Sphere;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import server.FieldData;
 
 /**
@@ -21,6 +23,7 @@ import server.FieldData;
  */
 public class ClientPlayfield {
     SimpleApplication sa;
+    LinkedList<FieldData> fd1;
     
     public ClientPlayfield(SimpleApplication sa){
         this.sa = sa;
@@ -38,7 +41,23 @@ public class ClientPlayfield {
         sg.setMaterial(mat);
         sg.setLocalTranslation(fd.x, fd.y, fd.z);
         
+        sg.setName("sphere"+ fd.id);
+        
         sphereNode.attachChild(sg);
+    }
+    
+    public void updatePlayfield(LinkedList<FieldData> fd, Node sphereNode){
+        ListIterator<FieldData> i;
+        FieldData f = null;
+        i = fd.listIterator();
+        
+        while(i.hasNext()){
+            f = i.next();
+            Spatial g = sphereNode.getChild("sphere"+f.id);
+            float s = (float)f.getEnergyLevel()* 0.01f;
+            System.out.println("float: "+s);
+            g.setLocalScale(s);
+        }
     }
     
 }
