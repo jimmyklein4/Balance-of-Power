@@ -56,7 +56,7 @@ public class ClientPlayfield {
         while(i.hasNext()){
             f = i.next();
             final Spatial g = sphereNode.getChild("sphere"+f.id);
-            final float s = (float)f.getEnergyLevel()* 0.01f;
+            final float s = (float)f.getEnergyLevel()/ 100f;
             System.out.println("float: "+s);
             //g.setLocalScale(s);
             //sa.enqueue(g);
